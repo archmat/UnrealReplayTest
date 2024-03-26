@@ -22,6 +22,10 @@ void UReplayTestGameInstance::Init()
 	// Link DeleteReplay() delegate to function
     //OnDeleteFinishedStreamCompleteDelegate = FOnDeleteFinishedStreamComplete::CreateUObject(this, &UReplayTestGameInstance::OnDeleteFinishedStreamComplete);
     OnDeleteFinishedStreamCompleteDelegate = FDeleteFinishedStreamCallback::CreateUObject(this, &UReplayTestGameInstance::OnDeleteFinishedStreamComplete);
+
+    // set replay version
+    CurrentReplayVersion = FNetworkVersion::GetReplayVersion();
+
 }
 
 void UReplayTestGameInstance::StartRecordingReplayFromBP(const FString& ReplayName, const FString& FriendlyName)
@@ -45,7 +49,8 @@ void UReplayTestGameInstance::FindReplays()
     {
         TArray<FString> ExtraParms;
 
-        EnumerateStreamsPtr.Get()->EnumerateStreams(FNetworkReplayVersion(), 0, FString(), ExtraParms, OnEnumerateStreamsCompleteDelegate);
+        //EnumerateStreamsPtr.Get()->EnumerateStreams(FNetworkReplayVersion(), 0, FString(), ExtraParms, OnEnumerateStreamsCompleteDelegate);
+        EnumerateStreamsPtr.Get()->EnumerateStreams(CurrentReplayVersion, 0, FString(), ExtraParms, OnEnumerateStreamsCompleteDelegate);
     }
 }
 
@@ -117,6 +122,7 @@ void UReplayTestGameInstance::OnEnumerateStreamsComplete(const FEnumerateStreams
 //void UReplayTestGameInstance::OnDeleteFinishedStreamComplete(const bool bDeleteSucceeded)
 void UReplayTestGameInstance::OnDeleteFinishedStreamComplete(const FDeleteFinishedStreamResult& DeleteResult)
 {
+    // for refresh replay list
     FindReplays();
 }
 

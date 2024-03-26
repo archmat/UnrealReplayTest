@@ -67,7 +67,7 @@ public:
     void StartRecordingReplayFromBP(const FString& ReplayName, const FString& FriendlyName);   
   
     /** Start recording a running replay and save it, from blueprint. */   
-    UFUNCTION(BlueprintCallable, Category = "Replays")   
+    UFUNCTION(BlueprintCallable, Category = "Replays")
     void StopRecordingReplayFromBP();   
   
     /** Start playback for a previously recorded Replay, from blueprint */   
@@ -108,5 +108,9 @@ private:
 
     //void OnDeleteFinishedStreamComplete(const bool bDeleteSucceeded);
     void OnDeleteFinishedStreamComplete(const FDeleteFinishedStreamResult& DeleteResult);
-    
+
+
+    //
+    FNetworkReplayVersion CurrentReplayVersion;
 };
+
