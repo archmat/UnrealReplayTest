@@ -30,12 +30,14 @@ void UReplayTestGameInstance::Init()
 
 void UReplayTestGameInstance::StartRecordingReplayFromBP(const FString& ReplayName, const FString& FriendlyName)
 {
+    TRACE(Log, "Start Recording");
 	StartRecordingReplay(ReplayName, FriendlyName);
 }
 
 void UReplayTestGameInstance::StopRecordingReplayFromBP()
 {
-	StopRecordingReplay();
+    TRACE(Log, "Stop Recording");
+    StopRecordingReplay();
 }
 
 void UReplayTestGameInstance::PlayReplayFromBP(const FString& ReplayName)

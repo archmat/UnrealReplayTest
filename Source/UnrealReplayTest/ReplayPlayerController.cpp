@@ -3,6 +3,8 @@
 
 #include "ReplayPlayerController.h"
 
+#include "UnrealReplayTest.h"
+
 
 AReplayPlayerController::AReplayPlayerController(const FObjectInitializer& ObjectInitializer) :	Super(ObjectInitializer)
 {
@@ -92,16 +94,15 @@ void AReplayPlayerController::ReplayGotoTime(const float GotoTime)
         {
             //GetWorldSettings()->SetPauserPlayerState(PlayerController->PlayerState);
             DemoNetDriver->GotoTimeInSeconds(GotoTime, GotoTimeDelegate);
-        
         }
         else
         {
-            UE_LOG(LogTemp, Error, TEXT("Invalid PlayerController"));
+            TRACE(Error, "Invalid PlayerController");
         }
     }
     else
     {
-        UE_LOG(LogTemp, Error, TEXT("Failed ReplayGotoTime"));
+        TRACE(Error, "Failed ReplayGotoTime");
     }
 }
 
